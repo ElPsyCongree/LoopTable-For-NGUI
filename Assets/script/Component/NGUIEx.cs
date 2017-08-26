@@ -58,10 +58,11 @@ public static class NGUIEx {
         UIScrollView.Movement moveType = table.columns == 0 ? UIScrollView.Movement.Horizontal : UIScrollView.Movement.Vertical;
         UITable.Direction direction = table.direction;
         int itemCount = datas.Count;//grid的行(列)数量
-        UIWidget tmpWidget = templateItem.GetComponent<UIWidget>();
+        Bounds b = NGUIMath.CalculateRelativeWidgetBounds(templateItem.transform, true);
+        
         Vector2 padding = table.padding;
-        int cellHeight = tmpWidget.height + (int)padding.y;
-        int cellWidth = tmpWidget.width;
+        int cellHeight = (int)b.size.y + (int)padding.y;
+        int cellWidth = (int)b.size.x;
         int fillCount = 0; //当前scrollView被填满的格子数
         int cacheNum = 3; //多出来的缓存格子
         Vector3 lastPos = Vector3.zero;
